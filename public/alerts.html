@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I HYDRO SMART - Alerts</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">🌿 I HYDRO SMART</div>
+    <ul class="nav-menu">
+      <li><a href="index.html">📊 Dashboard</a></li>
+      <li><a href="control.html">🎛️ Control</a></li>
+      <li><a href="history.html">📜 History</a></li>
+      <li><a href="alerts.html" class="active">🔔 Alerts</a></li>
+      <li><a href="settings.html">⚙️ Settings</a></li>
+      <li><a href="about.html">ℹ️ About</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>🔔 ระบบแจ้งเตือน</h1>
+      <div class="status">
+        <span id="wifi-status">🔴 ไม่ได้เชื่อมต่อ</span>
+        <span id="current-time">--:--:--</span>
+      </div>
+    </header>
+
+    <!-- Alert Summary -->
+    <div class="alert-summary">
+      <div class="summary-card critical">
+        <div class="summary-icon">🔴</div>
+        <div class="summary-content">
+          <div class="summary-label">Critical</div>
+          <div class="summary-count" id="critical-count">0</div>
+        </div>
+      </div>
+
+      <div class="summary-card warning">
+        <div class="summary-icon">🟠</div>
+        <div class="summary-content">
+          <div class="summary-label">Warning</div>
+          <div class="summary-count" id="warning-count">0</div>
+        </div>
+      </div>
+
+      <div class="summary-card normal">
+        <div class="summary-icon">🟢</div>
+        <div class="summary-content">
+          <div class="summary-label">Normal</div>
+          <div class="summary-count" id="normal-count">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Status -->
+    <div class="status-section">
+      <h2>📊 สถานะปัจจุบัน</h2>
+      <div class="status-grid">
+        <div class="status-item" id="status-temp">
+          <div class="status-header">
+            <span class="status-icon">🌡️</span>
+            <span class="status-name">อุณหภูมิ</span>
+            <span class="status-badge normal">ปกติ</span>
+          </div>
+          <div class="status-value">
+            <span class="value-current" id="temp-current">--</span>
+            <span class="value-range">ปกติ: 20-30°C</span>
+          </div>
+        </div>
+
+        <div class="status-item" id="status-humidity">
+          <div class="status-header">
+            <span class="status-icon">💧</span>
+            <span class="status-name">ความชื้น</span>
+            <span class="status-badge normal">ปกติ</span>
+          </div>
+          <div class="status-value">
+            <span class="value-current" id="humidity-current">--</span>
+            <span class="value-range">ปกติ: 60-80%</span>
+          </div>
+        </div>
+
+        <div class="status-item" id="status-ph">
+          <div class="status-header">
+            <span class="status-icon">🧪</span>
+            <span class="status-name">ค่า pH</span>
+            <span class="status-badge normal">ปกติ</span>
+          </div>
+          <div class="status-value">
+            <span class="value-current" id="ph-current">--</span>
+            <span class="value-range">ปกติ: 5.5-7.5</span>
+          </div>
+        </div>
+
+        <div class="status-item" id="status-ec">
+          <div class="status-header">
+            <span class="status-icon">🌿</span>
+            <span class="status-name">EC (สารอาหาร)</span>
+            <span class="status-badge normal">ปกติ</span>
+          </div>
+          <div class="status-value">
+            <span class="value-current" id="ec-current">--</span>
+            <span class="value-range">ปกติ: 1.0-2.5 mS/cm</span>
+          </div>
+        </div>
+
+        <div class="status-item" id="status-water">
+          <div class="status-header">
+            <span class="status-icon">🚰</span>
+            <span class="status-name">ระดับน้ำ</span>
+            <span class="status-badge normal">ปกติ</span>
+          </div>
+          <div class="status-value">
+            <span class="value-current" id="water-current">--</span>
+            <span class="value-range">ปกติ: > 5 cm</span>
+          </div>
+        </div>
+
+        <div class="status-item" id="status-light">
+          <div class="status-header">
+            <span class="status-icon">☀️</span>
+            <span class="status-name">ความเข้มแสง</span>
+            <span class="status-badge normal">ปกติ</span>
+          </div>
+          <div class="status-value">
+            <span class="value-current" id="light-current">--</span>
+            <span class="value-range">ปกติ: > 200 Lux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert History -->
+    <div class="alert-history">
+      <h2>📋 ประวัติการแจ้งเตือน</h2>
+      <div class="alert-list" id="alert-list">
+        <div class="alert-empty">ยังไม่มีการแจ้งเตือน</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="alerts.js"></script>
+</body>
+</html>

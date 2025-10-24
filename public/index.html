@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I HYDRO SMART - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span>I-HYDRO SMART</span>
+    </div>
+    <ul class="nav-menu">
+      <li><a href="index.html" class="active">📊 Dashboard</a></li>
+      <li><a href="control.html">🎛️ Control</a></li>
+      <li><a href="history.html">📜 History</a></li>
+      <li><a href="about.html">🔔 Alerts</a></li>
+      <li><a href="settings.html">⚙️ Settings</a></li>
+      <li><a href="about.html">ℹ️ About</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="header-section">
+      <div class="header-left">
+        <h1>🏡 Vegetable Garden</h1>
+        <div class="location-selector">
+          <label for="garden-location">📍 Current Location:</label>
+          <select id="garden-location">
+            <option value="bangkok" selected>Bangkok, Thailand</option>
+            <option value="weilburg">Weilburg, Germany</option>
+            <option value="farm_a">Farm A, Chiangmai</option>
+          </select>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="date-time" id="datetime">Loading...</div>
+        <span class="wifi-status" id="wifi-status">
+          🟡 กำลังเชื่อมต่อ
+        </span>
+      </div>
+    </div>
+    
+    <div class="dashboard-grid">
+      <!-- Weather Card -->
+      <div class="card weather-card">
+        <div class="location-controls">
+          <div class="location-method-selector">
+            <button id="use-current-location-btn" class="method-btn active">
+              📍 ตำแหน่งปัจจุบัน
+            </button>
+          </div>
+          
+          <div class="manual-location-input">
+            <div class="input-label">หรือปักหมุดตำแหน่ง:</div>
+            <div class="coord-inputs">
+              <input 
+                type="text" 
+                id="manual-lat" 
+                placeholder="Latitude" 
+                value="13.7563"
+                class="coord-input"
+              >
+              <input 
+                type="text" 
+                id="manual-lon" 
+                placeholder="Longitude" 
+                value="100.5018"
+                class="coord-input"
+              >
+            </div>
+            <button id="pin-location-btn" class="pin-btn">
+              📌 ปักหมุดที่นี่
+            </button>
+          </div>
+        </div>
+
+        <div class="weather-location" id="weather-location">
+          📍 กำลังโหลด...
+        </div>
+        <div class="weather-temp" id="current-temp">--°C</div>
+        <div class="weather-condition" id="weather-condition">
+          ⏳ กำลังโหลดข้อมูล...
+        </div>
+        <div class="weather-details">
+          H:<span id="temp-high">--°C</span> L:<span id="temp-low">--°C</span>
+        </div>
+        <div class="weather-extra">
+          <div>💨 ลม: <span id="weather-wind">-- m/s</span></div>
+          <div>💧 ความชื้น: <span id="weather-humidity">--%</span></div>
+        </div>
+        <div style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+          <div style="margin-bottom: 8px;">📍 <span id="garden-name-display">Vegetable Garden</span></div>
+          <div><span id="garden-plot-id">PL-024</span> | <span id="garden-area">200 m²</span></div>
+        </div>
+      </div>
+
+      <!-- Plant Health -->
+      <div class="card sensor-card plant-health">
+        <div class="sensor-icon">🌱</div>
+        <div class="sensor-label">Plant Health</div>
+        <div class="sensor-value" id="plant-health-value">94<span class="sensor-unit">%</span></div>
+      </div>
+
+      <!-- pH Level (จากบอร์ด) -->
+      <div class="card sensor-card" style="border-color: #9C27B0;">
+        <div class="sensor-icon">💧</div>
+        <div class="sensor-label">pH Level</div>
+        <div class="sensor-value" id="ph-value">--</div>
+        <div class="sensor-status" id="ph-status">⏳ รอข้อมูล</div>
+      </div>
+      
+      <!-- EC Level (จากบอร์ด) -->
+      <div class="card sensor-card" style="border-color: #FF9800;">
+        <div class="sensor-icon">⚡</div>
+        <div class="sensor-label">EC Level</div>
+        <div class="sensor-value" id="ec-value">--<span class="sensor-unit">mS/cm</span></div>
+        <div class="sensor-status" id="ec-status">⏳ รอข้อมูล</div>
+      </div>
+      
+      <!-- Humidity Indoor (จากบอร์ด) -->
+      <div class="card sensor-card" style="border-color: #00BCD4;">
+        <div class="sensor-icon">💨</div>
+        <div class="sensor-label">Humidity (Indoor)</div>
+        <div class="sensor-value" id="humidity-value">--<span class="sensor-unit">%</span></div>
+        <div class="sensor-status" id="humidity-status">⏳ รอข้อมูล</div>
+      </div>
+      
+      <!-- Water Temp (จากบอร์ด) -->
+      <div class="card sensor-card" style="border-color: #E91E63;">
+        <div class="sensor-icon">🌡️</div>
+        <div class="sensor-label">Water Temp</div>
+        <div class="sensor-value" id="water-temp-value">--<span class="sensor-unit">°C</span></div>
+        <div class="sensor-status" id="water-temp-status">⏳ รอข้อมูล</div>
+      </div>
+      
+      <!-- Light Intensity (จากบอร์ด) -->
+      <div class="card sensor-card" style="border-color: #FFC107;">
+        <div class="sensor-icon">☀️</div>
+        <div class="sensor-label">Light Intensity</div>
+        <div class="sensor-value" id="light-value">--<span class="sensor-unit">lux</span></div>
+        <div class="sensor-status" id="light-status">⏳ รอข้อมูล</div>
+      </div>
+      
+      <!-- Soil Moisture -->
+      <div class="card sensor-card" style="border-color: #8D6E63;">
+        <div class="sensor-icon">🌾</div>
+        <div class="sensor-label">Soil Moisture</div>
+        <div class="sensor-value" id="moisture-value">65<span class="sensor-unit">%</span></div>
+      </div>
+    </div>
+
+    <!-- Device List -->
+    <div class="card device-list">
+      <h3 style="margin-bottom: 15px; font-size: 1.1em; color: #333;">📱 Device</h3>
+      <div class="device-item">
+        <div class="device-icon" style="background: #4CAF50;">🌿</div>
+        <div class="device-info">
+          <div class="device-name">JL New H10: Soil Moisture Sensor</div>
+          <div class="device-type">#SM201 • Sensor</div>
+        </div>
+        <div class="status-dot"></div>
+      </div>
+      <div class="device-item">
+        <div class="device-icon" style="background: #2196F3;">💨</div>
+        <div class="device-info">
+          <div class="device-name">HC T200 Wind Sensor</div>
+          <div class="device-type">#WS008 • Sensor</div>
+        </div>
+        <div class="status-dot"></div>
+      </div>
+      <div class="device-item">
+        <div class="device-icon" style="background: #FFC107;">⚠️</div>
+        <div class="device-info">
+          <div class="device-name">ACE Temperature & Humidity</div>
+          <div class="device-type">#TH201 • Sensor</div>
+        </div>
+        <div class="status-dot"></div>
+      </div>
+      <div class="device-item">
+        <div class="device-icon" style="background: #9E9E9E;">📷</div>
+        <div class="device-info">
+          <div class="device-name">VG550 Camera</div>
+          <div class="device-type">#CAM42 • Camera</div>
+        </div>
+        <div class="status-dot inactive"></div>
+      </div>
+    </div>
+
+    <!-- Camera Card -->
+    <div class="card camera-card">
+      <div class="camera-header">
+        <div class="camera-name">📷 Camera 1</div>
+        <div>➡️</div>
+      </div>
+      <div class="camera-preview">🎥</div>
+      <div class="camera-controls">
+        <button class="camera-btn">⬅️</button>
+        <button class="camera-btn">📸</button>
+        <button class="camera-btn">🔄</button>
+        <button class="camera-btn">➡️</button>
+      </div>
+    </div>
+
+    <!-- Task Card -->
+    <div class="card task-card">
+      <h3 style="margin-bottom: 15px; font-size: 1.1em; color: #333;">📋 Task</h3>
+      
+      <div class="task-item">
+        <div class="task-title">
+          Watering ✅
+        </div>
+        <div class="task-progress">
+          <div class="task-progress-bar" style="width: 40%"></div>
+        </div>
+        <div class="task-desc">Water plants with 1 inch of water in the morning</div>
+        <div class="task-time">07:00 AM - 09:00 AM</div>
+      </div>
+
+      <div class="task-item">
+        <div class="task-title">
+          Fertilizing ✅
+        </div>
+        <div class="task-desc">Apply organic fertilizer at base of plants. Quantity: 50g per plant</div>
+        <div class="task-time">07:30 AM - 09:00 AM</div>
+      </div>
+
+      <div class="task-item">
+        <div class="task-title">Pest Inspection</div>
+        <div class="task-desc">Check leaves for any signs of aphids or other pests</div>
+        <div class="task-time">10:00 AM</div>
+      </div>
+
+      <div class="task-item">
+        <div class="task-title">Soil Aeration</div>
+        <div class="task-desc">Loosen soil around the plants carefully without damaging roots</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="control.html"></script>
+</body>
+</html>
