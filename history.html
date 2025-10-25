@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I HYDRO SMART - History</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=FontName:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">I HYDRO SMART</div>
+    <ul class="nav-menu">
+      <li><a href="index.html">📊 Dashboard</a></li>
+      <li><a href="control.html">🎛️ Control</a></li>
+      <li><a href="history.html" class="active">📜 History</a></li>
+      <li><a href="alerts.html">🔔 Alerts</a></li>
+      <li><a href="settings.html">⚙️ Settings</a></li>
+      <li><a href="about.html">ℹ️ About</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>ประวัติข้อมูล</h1>
+      <div class="status">
+        <span id="wifi-status">🔴 ไม่ได้เชื่อมต่อ</span>
+        <span id="current-time">--:--:--</span>
+      </div>
+    </header>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <h2>ตัวกรอง</h2>
+      <div class="filter-controls">
+        <button class="filter-btn active" onclick="filterData('today')">วันนี้</button>
+        <button class="filter-btn" onclick="filterData('week')">สัปดาห์นี้</button>
+        <button class="filter-btn" onclick="filterData('month')">เดือนนี้</button>
+        <button class="filter-btn" onclick="filterData('all')">ทั้งหมด</button>
+        <button class="export-btn" onclick="exportToCSV()">📥 Export CSV</button>
+      </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-content">
+          <div class="stat-label">จำนวนข้อมูล</div>
+          <div class="stat-value" id="total-records">--</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🌡️</div>
+        <div class="stat-content">
+          <div class="stat-label">อุณหภูมิเฉลี่ย</div>
+          <div class="stat-value" id="avg-temp">--</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">💧</div>
+        <div class="stat-content">
+          <div class="stat-label">ความชื้นเฉลี่ย</div>
+          <div class="stat-value" id="avg-humidity">--</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🧪</div>
+        <div class="stat-content">
+          <div class="stat-label">pH เฉลี่ย</div>
+          <div class="stat-value" id="avg-ph">--</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-container">
+      <h2>ตารางข้อมูล</h2>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>เวลา</th>
+              <th>🌡️ อุณหภูมิ (°C)</th>
+              <th>💧 ความชื้น (%)</th>
+              <th>☀️ แสง (Lux)</th>
+              <th>🌿 EC (mS/cm)</th>
+              <th>💎 TDS (ppm)</th>
+              <th>🧪 pH</th>
+              <th>🚰 น้ำ (cm)</th>
+            </tr>
+          </thead>
+          <tbody id="data-table-body">
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 40px;">
+                กำลังโหลดข้อมูล...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="history.js"></script>
+</body>
+</html>
